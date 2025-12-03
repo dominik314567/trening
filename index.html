@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>8-Week SBD Program – Barbell Only</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --bg-card: #020617;
+      --bg-card-soft: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.18);
+      --accent-strong: #f97316;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+      --shadow-subtle: 0 1px 0 rgba(148, 163, 184, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 32px 24px 56px;
+      }
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    .title-block h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      margin: 0 0 6px;
+      letter-spacing: -0.03em;
+    }
+
+    .title-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent),
+                  rgba(15, 23, 42, 0.78);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(56, 189, 248, 0.8);
+    }
+
+    .badge-strong {
+      border-color: rgba(249, 115, 22, 0.7);
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent),
+                  rgba(15, 23, 42, 0.9);
+    }
+
+    .badge-strong .badge-dot {
+      background: var(--accent-strong);
+      box-shadow: 0 0 6px rgba(249, 115, 22, 0.9);
+    }
+
+    /* Layout */
+
+    .grid-main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 960px) {
+      .grid-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .panel {
+      background: radial-gradient(circle at top left, rgba(51, 65, 85, 0.45), transparent),
+                  rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+    }
+
+    @media (min-width: 768px) {
+      .panel {
+        padding: 20px 20px 18px;
+      }
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .pill-accent {
+      border-color: rgba(56, 189, 248, 0.75);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .pill-strong {
+      border-color: rgba(249, 115, 22, 0.8);
+      color: var(--accent-strong);
+      background: rgba(249, 115, 22, 0.08);
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .fact {
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 1));
+      box-shadow: var(--shadow-subtle);
+      font-size: 0.8rem;
+    }
+
+    .fact-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+
+    .fact-value {
+      font-size: 0.9rem;
+    }
+
+    .fact-highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Weeks */
+
+    .weeks {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .week {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.25), transparent 55%),
+                  rgba(15, 23, 42, 0.95);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .week summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
+    }
+
+    .week summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .week-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .week-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .week-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+    }
+
+    .tag-acc {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: var(--accent);
+      background: rgba(8, 47, 73, 0.7);
+    }
+
+    .tag-int {
+      border-color: rgba(249, 115, 22, 0.9);
+      color: var(--accent-strong);
+      background: rgba(67, 20, 7, 0.8);
+    }
+
+    .tag-deload {
+      border-color: rgba(52, 211, 153, 0.9);
+      color: #6ee7b7;
+      background: rgba(6, 78, 59, 0.85);
+    }
+
+    .week-content {
+      padding: 12px 12px 14px;
+    }
+
+    @media (min-width: 768px) {
+      .week-content {
+        padding: 14px 16px 18px;
+      }
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .day-card {
+      border-radius: var(--radius-md);
+      padding: 10px 11px 11px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .day-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .day-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 7px 0 2px;
+    }
+
+    .lift-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.83rem;
+    }
+
+    .lift-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 2px 0;
+    }
+
+    .lift-name {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .lift-sets {
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .note strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .footer-note span {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="title-block">
+        <h1>8-Week Barbell-Only SBD Plan</h1>
+        <p>
+          6 sessions per week focused on <strong>Squat, Bench, and Deadlift</strong> with
+          exact loads based on your current PRs (115 / 130 / 160 kg). Includes
+          pull-ups, shoulder prehab, and full-body mobility with a built-in deload
+          around week 7.
+        </p>
+        <div class="badge-row">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            6&times;/week &middot; 2 months
+          </div>
+          <div class="badge badge-strong">
+            <span class="badge-dot"></span>
+            Exact weights in <strong>kg</strong>
+          </div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Barbell &amp; Pull-ups only
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid-main">
+      <!-- LEFT: WEEK-BY-WEEK PLAN -->
+      <section>
+        <div class="panel" style="margin-bottom: 16px;">
+          <h2>How to Read the Plan</h2>
+          <div class="pill-row">
+            <span class="pill pill-accent">Main lifts use exact kg</span>
+            <span class="pill">Accessory barbell work: start light, progress as needed</span>
+          </div>
+          <p style="font-size: 0.83rem; color: var(--muted); margin: 0 0 6px;">
+            All <strong>Squat / Bench / Deadlift</strong> sets are written as
+            <code>sets &times; reps @ weight in kg</code>. Accessories
+            and pull-ups are given as reps &amp; sets; choose a load you can
+            control and increase slowly when they feel easy.
+          </p>
+          <div class="quick-facts">
+            <div class="fact">
+              <div class="fact-label">Training Maxes Used</div>
+              <div class="fact-value">
+                <span class="fact-highlight">Bench:</span> 112.5 kg<br />
+                <span class="fact-highlight">Squat:</span> 127.5 kg<br />
+                <span class="fact-highlight">Deadlift:</span> 156 kg
+              </div>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Structure</div>
+              <div class="fact-value">
+                3 bench days, 2 squat days, 2 deadlift days (one heavy 3s + one lighter 5s),
+                plus built-in deload in week 7.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="weeks">
+          <!-- WEEK 1 -->
+          <details class="week" open>
+            <summary>
+              <div>
+                <div class="week-title">Week 1 &mdash; Accumulation</div>
+                <div class="week-subtitle">Volume &amp; technique with moderate weights</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-acc">Volume</span>
+                <span class="tag">Bench 3x / Squat 2x / Dead 2x</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <!-- W1D1 MON -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 1 &mdash; Monday</div>
+                    <div class="day-label">Squat 5s &amp; Bench 5s</div>
+                  </div>
+                  <div class="section-label">Main Lifts</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 95 kg, 3&times;5 @ 90 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 85 kg, 3&times;5 @ 80 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Barbell row</span>
+                      <span class="lift-sets">4&times;8&ndash;10 (moderate)</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Pull-ups</span>
+                      <span class="lift-sets">3 sets (leave 1&ndash;2 reps)</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Plank</span>
+                      <span class="lift-sets">3&times;30&ndash;60 s</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Shoulders &amp; Mobility</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Scap push-ups</span>
+                      <span class="lift-sets">2&times;15</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Band pull-aparts / T-raises</span>
+                      <span class="lift-sets">2&times;15</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bar dislocates</span>
+                      <span class="lift-sets">2&times;10</span>
+                    </li>
+                  </ul>
+                </article>
+
+                <!-- W1D2 TUE -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 2 &mdash; Tuesday</div>
+                    <div class="day-label">Deadlift 5s + OHP</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 117.5 kg, 3&times;5 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Standing OHP</span>
+                      <span class="lift-sets">4&times;6&ndash;8 (start ~35&ndash;40 kg)</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Romanian DL</span>
+                      <span class="lift-sets">3&times;8 (light/moderate)</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Chin-ups</span>
+                      <span class="lift-sets">3 sets (AMRAP)</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Mobility</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Hip &amp; hamstring flow</span>
+                      <span class="lift-sets">5&ndash;10 min</span>
+                    </li>
+                  </ul>
+                </article>
+
+                <!-- W1D3 WED -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 3 &mdash; Wednesday</div>
+                    <div class="day-label">Bench 3s + Upper Back</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 95 kg, 3&times;3 @ 90 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Pendlay row</span>
+                      <span class="lift-sets">4&times;6</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Wide/neutral pull-ups</span>
+                      <span class="lift-sets">3 sets</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">OHP (light)</span>
+                      <span class="lift-sets">3&times;8</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Shoulder Health</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Cuban press (empty bar)</span>
+                      <span class="lift-sets">2&times;10</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Wall slides</span>
+                      <span class="lift-sets">2&times;10</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Wide-grip row to chest</span>
+                      <span class="lift-sets">2&times;12 (very light)</span>
+                    </li>
+                  </ul>
+                </article>
+
+                <!-- W1D4 THU -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 4 &mdash; Thursday</div>
+                    <div class="day-label">Squat 3s</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 107.5 kg, 3&times;3 @ 102.5 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Stiff-leg DL</span>
+                      <span class="lift-sets">3&times;8</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Hanging leg raises</span>
+                      <span class="lift-sets">3&times;10&ndash;15</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Mobility</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Ankle &amp; hip work</span>
+                      <span class="lift-sets">5&ndash;10 min</span>
+                    </li>
+                  </ul>
+                </article>
+
+                <!-- W1D5 FRI -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 5 &mdash; Friday</div>
+                    <div class="day-label">Bench 1s + DL Technique</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench (heavy singles)</span>
+                      <span class="lift-sets">3&times;1 @ 100 kg, 3&times;3 @ 85 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Deadlift Technique</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Block pulls (just below knee)</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Barbell row</span>
+                      <span class="lift-sets">4&times;8</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Barbell curls</span>
+                      <span class="lift-sets">3&times;10&ndash;12</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Mobility</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Thoracic &amp; shoulder mobility</span>
+                      <span class="lift-sets">5&ndash;10 min</span>
+                    </li>
+                  </ul>
+                </article>
+
+                <!-- W1D6 SAT -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 6 &mdash; Saturday</div>
+                    <div class="day-label">Deadlift 3s + Bench CG</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 132.5 kg, 2&times;3 @ 125 kg,<br />1&times;1 @ 140 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Close-grip bench</span>
+                      <span class="lift-sets">4&times;6&ndash;8 (~80&ndash;85 kg)</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Barbell lunges / split squats</span>
+                      <span class="lift-sets">3&times;8 / leg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Pull-ups / chin-ups</span>
+                      <span class="lift-sets">3 sets</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Mobility</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Extended full-body mobility</span>
+                      <span class="lift-sets">10&ndash;15 min</span>
+                    </li>
+                  </ul>
+                </article>
+              </div>
+              <p class="note">
+                <strong>Sunday:</strong> rest day &mdash; easy walking, light stretching only.
+              </p>
+            </div>
+          </details>
+
+          <!-- WEEK 2 -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 2 &mdash; Accumulation</div>
+                <div class="week-subtitle">Slightly heavier 5s, smooth bar speed</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-acc">Volume</span>
+                <span class="tag">Progressive loading</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <!-- W2D1 -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 1 &mdash; Monday</div>
+                    <div class="day-label">Squat 5s &amp; Bench 5s</div>
+                  </div>
+                  <div class="section-label">Main Lifts</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 100 kg, 3&times;5 @ 92.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 87.5 kg, 3&times;5 @ 82.5 kg</span>
+                    </li>
+                  </ul>
+                  <div class="section-label">Accessories &amp; Mobility</div>
+                  <p class="note">
+                    Same accessory work, pull-ups, and shoulder circuit as Week 1 Monday.
+                  </p>
+                </article>
+
+                <!-- W2D2 -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 2 &mdash; Tuesday</div>
+                    <div class="day-label">Deadlift 5s + OHP</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 120 kg, 3&times;5 @ 112.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    Keep accessories identical to Week 1 Tuesday (OHP, RDLs, chins, mobility).
+                  </p>
+                </article>
+
+                <!-- W2D3 -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 3 &mdash; Wednesday</div>
+                    <div class="day-label">Bench 3s</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 95 kg, 3&times;3 @ 92.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    Same upper-back work and shoulder health as Week 1 Wednesday.
+                  </p>
+                </article>
+
+                <!-- W2D4 -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 4 &mdash; Thursday</div>
+                    <div class="day-label">Squat 3s</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 107.5 kg, 3&times;3 @ 105 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    Same hamstring, core, and mobility work as Week 1 Thursday.
+                  </p>
+                </article>
+
+                <!-- W2D5 -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 5 &mdash; Friday</div>
+                    <div class="day-label">Bench 1s + DL Technique</div>
+                  </div>
+                  <div class="section-label">Main Lift &amp; Technique</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;1 @ 105 kg, 3&times;3 @ 87.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    Accessories &amp; mobility same as Week 1 Friday.
+                  </p>
+                </article>
+
+                <!-- W2D6 -->
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Day 6 &mdash; Saturday</div>
+                    <div class="day-label">Deadlift 3s + CG Bench</div>
+                  </div>
+                  <div class="section-label">Main Lift</div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 132.5 kg, 2&times;3 @ 127.5 kg,<br />2&times;1 @ 145 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    Accessories &amp; mobility same as Week 1 Saturday; keep singles smooth.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <!-- WEEK 3 -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 3 &mdash; Accumulation (Peak)</div>
+                <div class="week-subtitle">Heaviest 5s &amp; 95% singles</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-acc">Volume Peak</span>
+                <span class="tag">95% singles</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Mon &mdash; Squat &amp; Bench 5s</div>
+                    <div class="day-label">Day 1</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 102.5 kg, 3&times;5 @ 95 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 90 kg, 3&times;5 @ 85 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Monday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Tue &mdash; Deadlift 5s</div>
+                    <div class="day-label">Day 2</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 125 kg, 3&times;5 @ 117.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Tuesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Wed &mdash; Bench 3s</div>
+                    <div class="day-label">Day 3</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 95 kg, 3&times;3 @ 95 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Wednesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Thu &mdash; Squat 3s</div>
+                    <div class="day-label">Day 4</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 107.5 kg, 3&times;3 @ 107.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Thursday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Fri &mdash; Bench 1s</div>
+                    <div class="day-label">Day 5</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;1 @ 107.5 kg, 3&times;3 @ 90 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Friday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Sat &mdash; Deadlift 3s</div>
+                    <div class="day-label">Day 6</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 132.5 kg, 2&times;3 @ 132.5 kg,<br />3&times;1 @ 147.5 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Saturday.</p>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <!-- WEEK 4 -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 4 &mdash; Intensification</div>
+                <div class="week-subtitle">Slightly heavier 3s, controlled singles</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-int">Intensity</span>
+                <span class="tag">Bench &amp; DL focus</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Mon &mdash; Squat/Bench 5s</div>
+                    <div class="day-label">Day 1</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 100 kg, 3&times;5 @ 92.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 87.5 kg, 3&times;5 @ 82.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Monday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Tue &mdash; Deadlift 5s</div>
+                    <div class="day-label">Day 2</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 120 kg, 3&times;5 @ 112.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Tuesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Wed &mdash; Bench 3s</div>
+                    <div class="day-label">Day 3</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 97.5 kg, 3&times;3 @ 92.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Wednesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Thu &mdash; Squat 3s</div>
+                    <div class="day-label">Day 4</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 112.5 kg, 3&times;3 @ 105 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Thursday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Fri &mdash; Bench 1s</div>
+                    <div class="day-label">Day 5</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;1 @ 105 kg, 3&times;3 @ 87.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Friday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Sat &mdash; Deadlift 3s</div>
+                    <div class="day-label">Day 6</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 137.5 kg, 2&times;3 @ 127.5 kg,<br />2&times;1 @ 145 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Saturday.</p>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <!-- WEEK 5 -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 5 &mdash; Intensification</div>
+                <div class="week-subtitle">Strong 3s &amp; 95% singles</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-int">Intensity</span>
+                <span class="tag">Heavy but submaximal</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Mon &mdash; Squat/Bench 5s</div>
+                    <div class="day-label">Day 1</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 102.5 kg, 3&times;5 @ 95 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 90 kg, 3&times;5 @ 85 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Monday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Tue &mdash; Deadlift 5s</div>
+                    <div class="day-label">Day 2</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 125 kg, 3&times;5 @ 117.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Tuesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Wed &mdash; Bench 3s</div>
+                    <div class="day-label">Day 3</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 97.5 kg, 3&times;3 @ 95 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Wednesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Thu &mdash; Squat 3s</div>
+                    <div class="day-label">Day 4</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 112.5 kg, 3&times;3 @ 107.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Thursday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Fri &mdash; Bench 1s</div>
+                    <div class="day-label">Day 5</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;1 @ 107.5 kg, 3&times;3 @ 90 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Friday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Sat &mdash; Deadlift 3s</div>
+                    <div class="day-label">Day 6</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 137.5 kg, 2&times;3 @ 132.5 kg,<br />3&times;1 @ 147.5 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Saturday.</p>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <!-- WEEK 6 -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 6 &mdash; Intensification (Top)</div>
+                <div class="week-subtitle">90% 3s &amp; 97.5% deadlift singles</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-int">Top Intensity</span>
+                <span class="tag">Prep for deload</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Mon &mdash; Squat/Bench 5s</div>
+                    <div class="day-label">Day 1</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 105 kg, 3&times;5 @ 100 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 92.5 kg, 3&times;5 @ 87.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Monday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Tue &mdash; Deadlift 5s</div>
+                    <div class="day-label">Day 2</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 127.5 kg, 3&times;5 @ 120 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Tuesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Wed &mdash; Bench 3s</div>
+                    <div class="day-label">Day 3</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 100 kg, 3&times;3 @ 97.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Wednesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Thu &mdash; Squat 3s</div>
+                    <div class="day-label">Day 4</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 115 kg, 3&times;3 @ 112.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Thursday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Fri &mdash; Bench 1s</div>
+                    <div class="day-label">Day 5</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;1 @ 110 kg, 3&times;3 @ 92.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Friday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Sat &mdash; Deadlift 3s</div>
+                    <div class="day-label">Day 6</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 140 kg, 2&times;3 @ 137.5 kg,<br />2&times;1 @ 152.5 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    Singles should be fast. If they grind, drop a bit of weight.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <!-- WEEK 7 DELOAD -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 7 &mdash; Deload</div>
+                <div class="week-subtitle">60% work, same movements, low fatigue</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-deload">Deload</span>
+                <span class="tag">3&times;5 / 3&times;3 @ light load</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Mon</div>
+                    <div class="day-label">Squat &amp; Bench (light)</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">3&times;5 @ 77.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;5 @ 67.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories: 50% of normal sets, same mobility.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Tue</div>
+                    <div class="day-label">Deadlift (light)</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">3&times;5 @ 92.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Minimal assistance, no heavy RDLs this week.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Wed</div>
+                    <div class="day-label">Bench (light)</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;3 @ 67.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Short, easy upper-back work only.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Thu</div>
+                    <div class="day-label">Squat (light)</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">3&times;3 @ 77.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Hamstring/core work stays very light.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Fri</div>
+                    <div class="day-label">Bench + DL tech (very light)</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;3 @ 67.5 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">3&times;3 @ 92.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Cut accessories in half; no hard sets.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Sat</div>
+                    <div class="day-label">Deadlift (light)</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">3&times;3 @ 92.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Extra mobility today is great. No singles.</p>
+                </article>
+              </div>
+            </div>
+          </details>
+
+          <!-- WEEK 8 -->
+          <details class="week">
+            <summary>
+              <div>
+                <div class="week-title">Week 8 &mdash; Reload</div>
+                <div class="week-subtitle">Repeat Week 5 loads after deload</div>
+              </div>
+              <div class="week-tags">
+                <span class="tag tag-int">Reload</span>
+                <span class="tag">Sets up next block / test</span>
+              </div>
+            </summary>
+            <div class="week-content">
+              <div class="week-grid">
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Mon &mdash; Squat/Bench 5s</div>
+                    <div class="day-label">Day 1</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;5 @ 102.5 kg, 3&times;5 @ 95 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;5 @ 90 kg, 3&times;5 @ 85 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Monday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Tue &mdash; Deadlift 5s</div>
+                    <div class="day-label">Day 2</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">1&times;5 @ 125 kg, 3&times;5 @ 117.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Tuesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Wed &mdash; Bench 3s</div>
+                    <div class="day-label">Day 3</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">1&times;3 @ 97.5 kg, 3&times;3 @ 95 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Wednesday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Thu &mdash; Squat 3s</div>
+                    <div class="day-label">Day 4</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Squat</span>
+                      <span class="lift-sets">1&times;3 @ 112.5 kg, 3&times;3 @ 107.5 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Thursday.</p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Fri &mdash; Bench 1s</div>
+                    <div class="day-label">Day 5</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Bench</span>
+                      <span class="lift-sets">3&times;1 @ 107.5 kg, 3&times;3 @ 90 kg</span>
+                    </li>
+                    <li>
+                      <span class="lift-name">Block pulls</span>
+                      <span class="lift-sets">4&times;3 @ 110 kg</span>
+                    </li>
+                  </ul>
+                  <p class="note">
+                    If everything flies, you can consider a small test in week 9.
+                  </p>
+                </article>
+                <article class="day-card">
+                  <div class="day-header">
+                    <div class="day-title">Sat &mdash; Deadlift 3s</div>
+                    <div class="day-label">Day 6</div>
+                  </div>
+                  <ul class="lift-list">
+                    <li>
+                      <span class="lift-name">Deadlift</span>
+                      <span class="lift-sets">
+                        1&times;3 @ 137.5 kg, 2&times;3 @ 132.5 kg,<br />2&times;1 @ 147.5 kg
+                      </span>
+                    </li>
+                  </ul>
+                  <p class="note">Accessories as Week 1 Saturday.</p>
+                </article>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <p class="footer-note">
+          <span>Tip:</span> if any single feels like an all-out grind, repeat the same
+          weight next week instead of increasing, or drop 2.5&ndash;5 kg.
+        </p>
+      </section>
+
+      <!-- RIGHT: DAILY ACCESSORIES / MOBILITY CHEATSHEET -->
+      <aside class="panel">
+        <h2>Daily Accessories &amp; Mobility Cheatsheet</h2>
+        <div class="pill-row">
+          <span class="pill pill-accent">Shoulder health every day</span>
+          <span class="pill">Pull-ups 3x/week minimum</span>
+        </div>
+
+        <div class="quick-facts" style="margin-top: 12px;">
+          <div class="fact">
+            <div class="fact-label">Daily Warm-Up</div>
+            <div class="fact-value">
+              &bull; 5 min easy cardio<br />
+              &bull; Dynamic hips/shoulders<br />
+              &bull; 3&ndash;5 ramp-up sets before your first heavy barbell lift
+            </div>
+          </div>
+          <div class="fact">
+            <div class="fact-label">Shoulder Prehab (Most Days)</div>
+            <div class="fact-value">
+              &bull; Scap push-ups: 2&times;15<br />
+              &bull; Band pull-aparts / T-raises: 2&times;15<br />
+              &bull; Bar dislocates: 2&times;10<br />
+              &bull; Cuban press (empty bar): 2&times;10
+            </div>
+          </div>
+        </div>
+
+        <div class="fact" style="margin-top: 12px;">
+          <div class="fact-label">Mobility Focus</div>
+          <div class="fact-value">
+            <strong>After training (5&ndash;10 min):</strong><br />
+            &bull; Deep bodyweight squat hold: 2&times;30&ndash;45 s<br />
+            &bull; Hamstring hip-hinge stretch: 2&times;30 s/side<br />
+            &bull; Ankle knee-over-toe rocks: 2&times;15/side<br />
+            &bull; Cat-camel &amp; thoracic rotations<br />
+            &bull; Extra shoulder dislocates if you feel tight
+          </div>
+        </div>
+
+        <div class="fact" style="margin-top: 12px;">
+          <div class="fact-label">Accessory Load Guidance</div>
+          <div class="fact-value">
+            For rows, OHP, lunges, RDLs, etc.:
+            <br />&bull; Start with a weight you could do
+            <strong>2&ndash;3 clean reps more</strong> than prescribed.
+            <br />&bull; When you hit the top of the rep range on all sets
+            for two weeks straight, add <strong>2.5 kg</strong>.
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
